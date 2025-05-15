@@ -196,6 +196,18 @@ public class Lista<T>{
         }
         return false;
     }
+    
+    public int lookUp(T e){
+        if(!contains(e)) return -1;
+        Nodo iterador = cabeza;
+        for(int j =0; j< longitud; j++){
+            if (e.equals(iterador.elemento)){
+                return j;
+            }
+            iterador = iterador.siguiente;
+        }
+        return -1;
+    }
 
     /**
      * Varifica si la lista esta vacia
