@@ -8,7 +8,7 @@ public class HashMap {
     /**
      * El tamaño de la tabla. Se puede modificar para escalar el tamaño al requerido.
      */
-    private static final int SIZE = 65536;
+    public static final int SIZE = 65536;
     /**
      * Listas de enlaces que servirán para manejar las colisiones.
      */
