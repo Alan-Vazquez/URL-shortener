@@ -197,10 +197,16 @@ public class Lista<T>{
         return false;
     }
     
+    /**
+     * Método que regresa el índice del elemento en la lista
+     * 
+     * @param e Elemento a buscar el indice
+     * @return Indice del elemento
+     */
     public int lookUp(T e){
         if(!contains(e)) return -1;
         Nodo iterador = cabeza;
-        for(int j =0; j< longitud; j++){
+        for(int j = 0; j < longitud; j++){
             if (e.equals(iterador.elemento)){
                 return j;
             }
@@ -224,6 +230,3 @@ public class Lista<T>{
         return new IteradorSimple(this.cabeza);
     }
 }
-
-
-
