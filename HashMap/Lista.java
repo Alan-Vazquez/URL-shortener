@@ -1,40 +1,17 @@
-import java.util.Iterator;
+import java.io.Serializable;
 
-public class Lista<T>{
+public class Lista<T extends Serializable> implements Serializable {
     
-    private class Nodo{
-        /* Elemento que vamos a almacenar */
+    // Clase Nodo no estática para acceder al genérico T
+    private class Nodo implements Serializable{
         public T elemento;
-        //Apuntador al nodo siguiente
         public Nodo siguiente;
-        //Crear un nodo a partir de un elemento de tipo T
-        public Nodo(T elemento){
-            this.elemento=elemento;
-        }
-    }
-    
-    private class IteradorSimple implements Iterator<T>{
         
-        //Variable que alamacenara la referencia al nodo actual del iterador
-        private Nodo iteradorLista;
-
-
-        public IteradorSimple(Nodo cabeza){
-            iteradorLista = new Nodo(null);
-            iteradorLista.siguiente= cabeza;
-        }
-
-        //Metodo para ver si hay elementos por recorrer
-        public boolean hasNext(){
-            return iteradorLista.siguiente != null; 
-        }
-
-        //Metodo para avanzar al siguiente nodo
-        public T next(){
-            iteradorLista = iteradorLista.siguiente;
-            return iteradorLista.elemento;
+        public Nodo(T elemento){
+            this.elemento = elemento;
         }
     }
+
 
     /**Nodo inicial de la lisa */
     private Nodo cabeza;
@@ -78,7 +55,6 @@ public class Lista<T>{
         if(i == longitud){
             cola.siguiente = nuevo;
             cola = nuevo;
-
             longitud++;
             return;
         }
@@ -93,8 +69,6 @@ public class Lista<T>{
         iterador.siguiente = nuevo;
         longitud++;
     }
-
-    
 
     /** 
      * Elimina un elemento en la posición i, y te regresa el elemento que se esta eliminando
@@ -141,8 +115,8 @@ public class Lista<T>{
         iterador.siguiente = iterador.siguiente.siguiente;
         longitud--;
         return eliminado;
-
     }
+
     /** 
       * Elimina todos los elementos de una lista
       */
@@ -188,7 +162,7 @@ public class Lista<T>{
             return e.equals(cabeza.elemento);
         }
         Nodo iterador = cabeza;
-        for(int j =0; j< longitud; j++){
+        for(int i =0; i< longitud; i++){
             if (e.equals(iterador.elemento)){
                 return true;
             }
@@ -206,9 +180,9 @@ public class Lista<T>{
     public int lookUp(T e){
         if(!contains(e)) return -1;
         Nodo iterador = cabeza;
-        for(int j = 0; j < longitud; j++){
+        for(int i = 0; i < longitud; i++){
             if (e.equals(iterador.elemento)){
-                return j;
+                return i;
             }
             iterador = iterador.siguiente;
         }
@@ -224,9 +198,5 @@ public class Lista<T>{
 
     public int size(){
         return longitud;
-    }
-
-    public Iterator<T> iterador(){
-        return new IteradorSimple(this.cabeza);
     }
 }

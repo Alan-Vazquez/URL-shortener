@@ -1,10 +1,12 @@
+import java.io.Serializable;
+
 /**
  * Clase que modela una tabla hash para almacenar URLs
  * @author José María Hernández Pérez y Alan Vazquez Serralta
  * @version 1.0 
  * @date 15-may-2025
  */
-public class HashMap {
+public class HashMap implements Serializable {
     /**
      * El tamaño de la tabla. Se puede modificar para escalar el tamaño al requerido.
      */

@@ -1,10 +1,12 @@
+import java.io.Serializable;
+
 /**
  * Clase tipo envoltura que adapta un String para que se pueda tratar como URL
  * @author José María Hernández Pérez y Alan Vazquez Serralta
  * @version 1.0 
  * @date 15-may-2025
  */
-public class Link {
+public class Link implements Serializable {
     /**
      * Cadena a envolver
      */
@@ -16,6 +18,7 @@ public class Link {
      * @throws Exception Se acompaña de un código de error. Referir a isValid(String).
      */
     public Link(String l) throws Exception {
+        l = l.trim();
         if (l.startsWith("http://")) {
             l = l.substring(7);
         } else if (l.startsWith("https://")) {
@@ -26,7 +29,7 @@ public class Link {
             l = l.substring(0, l.length() - 1);
         }
 
-        if (isValid(l) != 0) throw new Exception("No es un link valido: " + isValid(l));
+        if (isValid(l) != 0) throw new Exception("No es un link valido.\n CODIGO DE ERROR: " + isValid(l)+"\n Refiere a la documentacion de Link para un diagnóstico.");
         link = l;
     }  
 

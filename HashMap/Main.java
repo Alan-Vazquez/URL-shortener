@@ -1,13 +1,32 @@
 import java.awt.*;
 import javax.swing.*;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.File;
 
 public class Main extends JFrame {
     private HashMap urlMap;
 
+    public void initMap(){
+        ObjectInputStream fileReader = null;
+        try {
+            File strg = new File("HashMap.txt");
+            if (!strg.exists()) strg.createNewFile();
+            fileReader = new ObjectInputStream(new FileInputStream("HashMap.txt"));
+            urlMap = (HashMap) fileReader.readObject();
+            fileReader.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            urlMap = new HashMap();
+        }
+    }
+
     public Main() {
         super("Acortador de URLs");
-        urlMap = new HashMap();
-        //cargarArchivo();
+        urlMap = null;
+        initMap();
         initUI();
     }
 
@@ -24,7 +43,7 @@ public class Main extends JFrame {
             new JButton("3. Recuperar URL"),
             new JButton("4. Eliminar URL"),
             new JButton("5. Mostrar histograma"),
-           // new JButton("6. Salir")
+            new JButton("6. Salir")
         };
         
         for (JButton button : buttons) {
@@ -38,10 +57,7 @@ public class Main extends JFrame {
         buttons[2].addActionListener(e -> recuperarURL());
         buttons[3].addActionListener(e -> eliminarURL());
         buttons[4].addActionListener(e -> mostrarHistograma());
-        //buttons[5].addActionListener(e -> { 
-          //  guardarArchivo();
-          //  System.exit(0);
-        //}); 
+        buttons[5].addActionListener(e -> exit()); 
     }
 
     private void agregarURL() {
@@ -110,5 +126,15 @@ public class Main extends JFrame {
         SwingUtilities.invokeLater(() -> {
             new Main().setVisible(true);
         });
+    }
+
+    public void exit(){
+        ObjectOutputStream guardar = null;
+        try {
+            guardar = new ObjectOutputStream(new FileOutputStream("HashMap.txt"));
+            guardar.writeObject(urlMap);
+            guardar.close();
+        } catch (Exception e) { e.printStackTrace();}
+        System.exit(0);
     }
 }
