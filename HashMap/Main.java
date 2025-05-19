@@ -1,27 +1,28 @@
 import java.awt.*;
-import javax.swing.*;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.File;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import javax.swing.*;
 
 public class Main extends JFrame {
     private HashMap urlMap;
 
-    public void initMap(){
-        ObjectInputStream fileReader = null;
-        try {
-            File strg = new File("HashMap.txt");
-            if (!strg.exists()) strg.createNewFile();
-            fileReader = new ObjectInputStream(new FileInputStream("HashMap.txt"));
-            urlMap = (HashMap) fileReader.readObject();
-            fileReader.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+    private void initMap() {
+        File file = new File("HashMap.txt");
+        if (file.exists()) {
+            try (ObjectInputStream fileReader = new ObjectInputStream(new FileInputStream(file))) {
+                urlMap = (HashMap) fileReader.readObject();
+            } catch (Exception e) {
+                System.out.println("No se pudo cargar el archivo. Se crea un nuevo mapa.");
+                urlMap = new HashMap();
+            }
+        } else {
             urlMap = new HashMap();
         }
-    }
+    }    
 
     public Main() {
         super("Acortador de URLs");
@@ -104,8 +105,12 @@ public class Main extends JFrame {
         String longUrl = JOptionPane.showInputDialog(this, "Ingrese la URL larga a eliminar:");
         if (longUrl != null) {
             try {
-                urlMap.remove(longUrl);
-                JOptionPane.showMessageDialog(this, "URL eliminada correctamente.");
+                Link eliminado = urlMap.remove(longUrl);
+                if (eliminado != null) {
+                    JOptionPane.showMessageDialog(this, "URL eliminada");
+                } else {
+                    JOptionPane.showMessageDialog(this, "La URL no está registrada.");
+                }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Error al eliminar: " + e.getMessage());
             }
@@ -121,20 +126,21 @@ public class Main extends JFrame {
         frame.setLocationRelativeTo(this);
         frame.setVisible(true);
     }
+    
+    public void exit() {
+        try (ObjectOutputStream guardar = new ObjectOutputStream(new FileOutputStream("HashMap.txt"))) {
+            guardar.writeObject(urlMap);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error al guardar: " + e.getMessage());
+        }
+        System.exit(0);
+    }
+    
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             new Main().setVisible(true);
         });
     }
-
-    public void exit(){
-        ObjectOutputStream guardar = null;
-        try {
-            guardar = new ObjectOutputStream(new FileOutputStream("HashMap.txt"));
-            guardar.writeObject(urlMap);
-            guardar.close();
-        } catch (Exception e) { e.printStackTrace();}
-        System.exit(0);
-    }
+    
 }
