@@ -48,6 +48,7 @@ public class HashMap implements Serializable {
      */
     public String add(String url) throws Exception {
         Link link = new Link(url);
+        if (contains(url)) throw new Exception("La URL ya esta almacenada: "+shorten(url));
         return add(link);
     }
 

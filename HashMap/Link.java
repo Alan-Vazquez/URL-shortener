@@ -70,32 +70,28 @@ public class Link implements Serializable {
      * 1. Si la cadena está vacía.
      * 2. Si la longitud de la cadena excede 1024 caracteres.
      * 3. Si la cadena contiene un espacio.
-     * 4. Si la cadena no contiene un ".".
-     * 5. Si la cadena empieza o termina con un ".".
-     * 6. Si (a excepción de protocolos http:// y https://) una diagonal precede a un punto.
-     * 7. Si alguno de los subdominios (separados por ".") está vacío.
-     * 8. Si la longitud de algún subdominio excede 64 caracteres.
-     * 9. Si alguno de los subdominios empieza o termina por "-".
-     * 10. Si el TLD (el último subdomino, por ejemplo .com) tiene una longitud menor a 11.
+     * 4. Si (a excepción de algún protocolo) una diagonal precede a un punto.
+     * 5. Si alguno de los subdominios (separados por ".") está vacío.
+     * 6. Si la longitud de algún subdominio excede 64 caracteres.
+     * 7. Si alguno de los subdominios empieza o termina por "-".
+     * 8. Si el TLD (el último subdomino, por ejemplo .com) tiene una longitud menor a 11.
      */
     private static int isValid(String l) {
         l = l.trim();
         if (l == null || l.isEmpty()) return 1;
         if (l.length() > 1024) return 2;
         if (l.contains(" ")) return 3;
-        if (!l.contains(".")) return 4;
-        if (l.startsWith(".") || l.endsWith(".")) return 5;
-        if (!l.startsWith("https://") && !l.startsWith("http://")) if (l.indexOf('/') < l.indexOf('.') && l.indexOf('/') != -1) return 6;
+        if (!l.contains("://")) if (l.indexOf('/') < l.indexOf('.') && l.indexOf('/') != -1) return 4;
         String dom = (l.indexOf('/') == -1) ? l : l.substring(0, l.indexOf('/'));
         String[] subdoms = dom.split("\\.");
         for (int i = 0; i < subdoms.length; i++) {
             String s = subdoms[i];
-            if (s.isEmpty()) return 7;
-            if (s.length() >= 64) return 8;
-            if (s.startsWith("-") || s.endsWith("-")) return 9;
+            if (s.isEmpty()) return 5;
+            if (s.length() >= 64) return 6;
+            if (s.startsWith("-") || s.endsWith("-")) return 7;
         }
         String tld = subdoms[subdoms.length - 1];
-        if (tld.length() < 2) return 10;
+        if (tld.length() < 2) return 8;
         return 0;
     }
 
