@@ -13,7 +13,7 @@ import java.io.File;
 public class Main extends JFrame {
     private HashMap urlMap;
 
-    public static void main(String[] args) {
+    public static void main(String[] werfwerf) {
         SwingUtilities.invokeLater(() -> {
             new Main().setVisible(true);
         });        
