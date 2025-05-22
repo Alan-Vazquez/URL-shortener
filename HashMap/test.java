@@ -461,8 +461,6 @@ public class test {
     "https://news.google.com/articles/CAIiEJ5KQ5q3m4zX7X8Y9X1Y2X3Y4?hl=en-US&gl=US&ceid=US:en\n" +
     "https://cloud.google.com/run/docs/quickstarts/build-and-deploy/deploy-java-service\n" +
     "https://developers.google.com/maps/documentation/urls/get-started#universal-cross-platform-syntax\n" +
-
-    // Extended YouTube URLs (10 variants)
     "https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=PLABCDEFGHIJKLMNOPQRSTUVWXYZ&index=1&t=10s\n" +
     "https://youtu.be/dQw4w9WgXcQ?t=42\n" +
     "https://studio.youtube.com/channel/UCABCDEFGHIJKLMNOPQRSTUV/videos/editing\n" +
@@ -473,8 +471,6 @@ public class test {
     "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1\n" +
     "https://www.youtube.com/results?search_query=java+url+shortener+test\n" +
     "https://www.youtube.com/hashtag/test\n" +
-
-    // Extended GitHub URLs (10 variants)
     "https://github.com/username/repo-name/blob/main/src/com/example/Test.java#L42-L56\n" +
     "https://github.com/username/repo-name/compare/main...feature-branch?expand=1\n" +
     "https://github.com/username/repo-name/issues/123#issuecomment-1234567890\n" +
@@ -485,8 +481,6 @@ public class test {
     "https://github.com/username/repo-name/releases/tag/v1.2.3\n" +
     "https://github.com/username/repo-name/archive/refs/heads/main.zip\n" +
     "https://github.com/features/actions\n" +
-
-    // Extended Amazon URLs (10 variants)
     "https://www.amazon.com/Product-Name/dp/B08N5KWB9H/ref=sr_1_1?keywords=test+product&qid=1234567890&sr=8-1&th=1\n" +
     "https://www.amazon.com/gp/product/B08N5KWB9H/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&psc=1\n" +
     "https://www.amazon.com/Amazon-Video/b?ie=UTF8&node=2858778011\n" +
@@ -497,8 +491,6 @@ public class test {
     "https://www.amazon.com/gp/css/order-history?ref_=nav_orders_first\n" +
     "https://www.amazon.com/gp/bestsellers/?ref_=nav_cs_bestsellers\n" +
     "https://www.amazon.com/gp/goldbox?ref_=nav_cs_gb\n" +
-
-    // Extended Stack Overflow URLs (10 variants)
     "https://stackoverflow.com/questions/12345678/how-to-test-a-url-shortener-in-java\n" +
     "https://stackoverflow.com/a/12345678/1234567\n" +
     "https://stackoverflow.com/questions/tagged/java+url-shortener?sort=votes&pageSize=15\n" +
@@ -648,7 +640,7 @@ public class test {
             for (String url : arr) {
                 System.out.print(url + ": ");
                 try {
-                    map.put(url);
+                    map.add(url);
                     inserted++;
                     long idx = new Link(url).toHashCode() % HashMap.SIZE;
                     System.out.printf("Inserted: index %d%n", idx);

@@ -46,7 +46,7 @@ public class HashMap implements Serializable {
      * @return El identificador acortado del enlace.
      * @throws Exception Si la URL es inválida o ocurre un error al insertar.
      */
-    public String put(String url) throws Exception {
+    public String add(String url) throws Exception {
         Link link = new Link(url);
         return add(link);
     }
@@ -68,19 +68,18 @@ public class HashMap implements Serializable {
      * @param url La cadena del enlace a eliminar
      * @throws Exception Si la URL es inválida o ocurre un error al procesarla
      */
-    public void remove(String url) throws Exception {
+    public Link remove(String url) throws Exception {
         Link link = new Link(url);
         int index = link.toHashCode() % SIZE;
-    
         Lista<Link> lista = cols[index];
-        if (lista == null || lista.isEmpty()) return;
-    
+        if (lista == null || lista.isEmpty()) return null;
         for (int i = 0; i < lista.size(); i++) {
             if (lista.get(i).equals(link)) {
-                lista.remove(i);
-                return;
+                Link eliminado = lista.remove(i);
+                return eliminado;
             }
         }
+        return null;
     }
     
     /**
@@ -94,10 +93,10 @@ public class HashMap implements Serializable {
     public String shorten(String l) throws Exception {
         Link link = new Link(l);
         if (contains(l)) {
-            int hash = link.toHashCode();
-            int index = hash % SIZE;
+            int hash = link.toHashCode() % SIZE;
+            int index = hash;
             int pos = cols[index].lookUp(link);
-            String iHex = String.format("%04x", hash & 0xFFFF); 
+            String iHex = String.format("%04x", hash); 
             String idHex = Integer.toHexString(pos);
             return iHex + idHex;
         }

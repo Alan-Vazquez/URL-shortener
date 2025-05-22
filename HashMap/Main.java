@@ -12,9 +12,9 @@ public class Main extends JFrame {
     public void initMap(){
         ObjectInputStream fileReader = null;
         try {
-            File strg = new File("HashMap.txt");
+            File strg = new File("HashMap.ser");
             if (!strg.exists()) strg.createNewFile();
-            fileReader = new ObjectInputStream(new FileInputStream("HashMap.txt"));
+            fileReader = new ObjectInputStream(new FileInputStream("HashMap.ser"));
             urlMap = (HashMap) fileReader.readObject();
             fileReader.close();
         } catch (Exception e) {
@@ -65,7 +65,7 @@ public class Main extends JFrame {
         if (longUrl == null) return;
 
         try {
-            String shortUrl = urlMap.put(longUrl);
+            String shortUrl = urlMap.add(longUrl);
             JOptionPane.showMessageDialog(this, "URL corta generada: " + shortUrl);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
@@ -103,9 +103,13 @@ public class Main extends JFrame {
     private void eliminarURL() {
         String longUrl = JOptionPane.showInputDialog(this, "Ingrese la URL larga a eliminar:");
         if (longUrl != null) {
-            try {
-                urlMap.remove(longUrl);
-                JOptionPane.showMessageDialog(this, "URL eliminada correctamente.");
+            try {                
+                Link eliminado = urlMap.remove(longUrl);
+                if (eliminado != null) {
+                    JOptionPane.showMessageDialog(this, "URL eliminada");
+                } else {
+                    JOptionPane.showMessageDialog(this, "La URL no está registrada.");
+                }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Error al eliminar: " + e.getMessage());
             }
@@ -131,10 +135,12 @@ public class Main extends JFrame {
     public void exit(){
         ObjectOutputStream guardar = null;
         try {
-            guardar = new ObjectOutputStream(new FileOutputStream("HashMap.txt"));
+            guardar = new ObjectOutputStream(new FileOutputStream("HashMap.ser"));
             guardar.writeObject(urlMap);
             guardar.close();
-        } catch (Exception e) { e.printStackTrace();}
+        } catch (Exception e) { 
+            JOptionPane.showMessageDialog(this, "Error al guardar: " + e.getMessage());
+        }
         System.exit(0);
     }
 }

@@ -56,10 +56,9 @@ public class Link implements Serializable {
      * @throws Exception - Si uno de los caracteres es inválido
      */
     public int toHashCode() throws Exception {
-        int base = 13; 
         int hash = 0;
         for (int i = 0; i < link.length(); i++) {
-            hash = hash * base + toNumber(link.charAt(i));
+            hash = hash * 67 + toNumber(link.charAt(i));
         }
         return Math.abs(hash); 
     }
