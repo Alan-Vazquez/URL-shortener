@@ -20,33 +20,18 @@ Instalación del proyecto
 Requisitos Previos:
 - Tener instalado Java Development Kit versión 17 o superior.
 
-- (Opcional) Tener un IDE para Java para facilitar la compilación y ejecución.
-
 Pasos para instalar y ejecutar el proyecto:
-1. Descargar o clonar el repositorio de Git
-   - Si prefiere el repositorio Git, clónelo con:
-     git clone https://github.com/Alan-Vazquez/URL-shortener.git
-   - Si prefiere el archivo ZIP, descomprímalo en una carpeta local.
+1. Descomprima el archivo .zip.
 
-2. Abrir la carpeta del proyecto en tu IDE o en consola.
+2. Abrir la carpeta del proyecto en consola.
 
 3. Compilar el proyecto
-   Con IDE:
-   - Importe el proyecto como proyecto Java estándar.
-   - Asegúrese de que el Java Development Kit configurado sea 17 o superior.
-   - Compile el proyecto.
-
-   Con consola:
    - Abra la consola.
-   - Navegue a la carpeta donde están los archivos .java.
+   - Navegue a la carpeta "Codigo" donde están los archivos .java.
    - Ejecute el siguiente comando para compilar todos los archivos:
      javac *.java
      
 4. Ejecutar el proyecto
-   Con IDE:
-   - Ejecute la clase Main.
-
-   Con consola:
    - Ejecute el siguiente comando:
      java Main
 
