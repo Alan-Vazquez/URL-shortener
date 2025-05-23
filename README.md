@@ -1,1 +1,58 @@
 # URL-shortener
+Proyecto Final - Acortador de URLs mediante tablas hash
+
+José María Hernández Pérez
+Alan Vazquez Serralta
+
+425082384
+322490516
+
+Estructuras de Datos
+
+Ulises Rodriguez Dominguez
+
+Facultad de Ciencias de la Universidad Nacional
+Autónoma de México
+
+Estructura de Archivos del Proyecto
+====================================
+
+Este proyecto implementa una interfaz gráfica para gestionar URLs largas y su versión corta, utilizando una estructura propia de HashMap y listas enlazadas simples. A continuación se describen brevemente los archivos fuente incluidos:
+
+1. **Main.java**
+   - Clase principal del proyecto, contiene la ventana gráfica construida con Java Swing.
+   - Proporciona botones para:
+     - Agregar, buscar y eliminar URLs
+     - Cargar URLs desde archivos `.txt` o `.csv`
+     - Guardar datos en disco
+     - Mostrar un histograma gráfico de la distribución interna del HashMap
+
+2. **HashMap.java**
+   - Implementación personalizada de una tabla hash (HashMap) sin usar java.util.
+   - Las colisiones se resuelven mediante encadenamiento con listas.
+   - Incluye funciones para insertar, buscar, eliminar y calcular estadísticas de ocupación.
+
+3. **Lista.java**
+   - Lista simplemente ligada genérica.
+   - Permite insertar, eliminar, buscar elementos, obtener por índice y recorrer la lista.
+   - Se utiliza como base para manejar las colisiones en el HashMap.
+
+4. **Histograma.java**
+   - Clase Swing que representa gráficamente un histograma de frecuencias.
+   - Cada barra indica cuántas claves están almacenadas en grupos de posiciones (bins) de la tabla hash.
+   - Usa Graphics2D para un diseño claro y visualmente informativo.
+
+5. **Link.java**
+   - Clase que representa una URL y su versión corta.
+   - Almacena internamente tanto la URL original como su clave corta generada.
+   - Es serializable para su almacenamiento persistente.
+
+6. **HashMap.ser**
+   - Archivo binario que guarda automáticamente el estado del HashMap cuando se cierra la aplicación.
+   - Se utiliza para mantener los datos entre sesiones sin necesidad de cargar el archivo manualmente.
+
+7. **urls.txt / urls.csv** *(opcional)*
+   - Archivos de entrada de texto con pares de URLs en formato:
+     https://ejemplo.com,Q1W2E3
+     https://otra.com,AABBCC
+   - Se cargan mediante la opción "Cargar archivo" en la interfaz gráfica.
