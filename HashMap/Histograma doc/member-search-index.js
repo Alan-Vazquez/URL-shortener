@@ -1,1 +1,0 @@
-memberSearchIndex = [{"p":"<Unnamed>","c":"Histograma","l":"Histograma(int[])","u":"%3Cinit%3E(int[])"},{"p":"<Unnamed>","c":"Histograma","l":"paintComponent(Graphics)","u":"paintComponent(java.awt.Graphics)"}];updateSearchResults();
