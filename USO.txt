@@ -1,0 +1,40 @@
+# URL-shortener
+Proyecto Final - Acortador de URLs mediante tablas hash
+
+José María Hernández Pérez
+Alan Vazquez Serralta
+
+425082384
+322490516
+
+Estructuras de Datos
+
+Ulises Rodriguez Dominguez
+
+Facultad de Ciencias de la Universidad Nacional
+Autónoma de México
+
+Uso del Proyecto
+================
+
+Este programa permite acortar URLs largas en códigos más cortos, administrar un historial de enlaces acortados y visualizar estadísticas sobre su uso. También guarda automáticamente los datos entre sesiones utilizando serialización.
+
+Casos de uso principales:
+
+1. Acortar una URL
+   - El usuario ingresa una URL larga, y el sistema genera un código corto único que redirige a la URL original.
+
+2. Buscar URL por código acortado
+   - El usuario introduce un código corto, y el sistema devuelve la URL original asociada.
+   
+3. Recuperar URL larga
+   - El usuario ingresa una URL corta y el sistema le devuele la URL larga asociada.
+   
+4. Eliminar URL
+   - El usuario ingresa una URL larga, el sistema la busca y elimina su versión acortada.
+   
+5. Mostrar historial de URLs 
+   - El sistema muestra todas las URLs acortadas anteriormente en un histograma, junto con sus estadisticas.
+   
+6. Importar URLs
+   - El usuario ingresa el nombre de el archivo de texto o CSV y el sistema acorta las URLs  y las carga a la tabla.
