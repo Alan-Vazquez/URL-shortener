@@ -46,8 +46,9 @@ public class HashMap implements Serializable {
      * @return El identificador acortado del enlace.
      * @throws Exception Si la URL es inválida o ocurre un error al insertar.
      */
-    public String put(String url) throws Exception {
+    public String add(String url) throws Exception {
         Link link = new Link(url);
+        if (contains(url)) throw new Exception("La URL ya esta almacenada: "+shorten(url));
         return add(link);
     }
 
@@ -64,28 +65,24 @@ public class HashMap implements Serializable {
     }
 
     /**
-     * Elimina una URL de la tabla hash si existe.
-     * @param url La URL a eliminar.
-     * @return El objeto Link eliminado, o null si no se encontró.
-     * @throws Exception si ocurre un error con la URL.
+     * Elimina un enlace del hash si se encuentra
+     * @param url La cadena del enlace a eliminar
+     * @throws Exception Si la URL es inválida o ocurre un error al procesarla
      */
     public Link remove(String url) throws Exception {
         Link link = new Link(url);
         int index = link.toHashCode() % SIZE;
-
         Lista<Link> lista = cols[index];
         if (lista == null || lista.isEmpty()) return null;
-
         for (int i = 0; i < lista.size(); i++) {
             if (lista.get(i).equals(link)) {
-                Link eliminado = lista.get(i);
-                lista.remove(i);
+                Link eliminado = lista.remove(i);
                 return eliminado;
             }
         }
         return null;
     }
-
+    
     /**
      * Regresa el nombre acortado de un link almacenado en la tabla hash en el formato HHHHID
      * HHHH: Los primeros 4 dígitos son su índice en hexadecimal: 0000 es 0, y FFFF es 65535.
@@ -97,10 +94,10 @@ public class HashMap implements Serializable {
     public String shorten(String l) throws Exception {
         Link link = new Link(l);
         if (contains(l)) {
-            int hash = link.toHashCode();
-            int index = hash % SIZE;
+            int hash = link.toHashCode() % SIZE;
+            int index = hash;
             int pos = cols[index].lookUp(link);
-            String iHex = String.format("%04x", hash & 0xFFFF); 
+            String iHex = String.format("%04x", hash); 
             String idHex = Integer.toHexString(pos);
             return iHex + idHex;
         }
@@ -179,4 +176,5 @@ public class HashMap implements Serializable {
         return hist;
     }
 
+    
 }
