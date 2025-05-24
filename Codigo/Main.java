@@ -29,7 +29,7 @@ public class Main extends JFrame {
             urlMap = (HashMap) fileReader.readObject();
             fileReader.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("No se encontraron URLs previamente almacenadas. Inicializando tabla vacia.");
             urlMap = new HashMap();
         }
     }
@@ -55,13 +55,13 @@ public class Main extends JFrame {
         getContentPane().setBackground(Color.BLACK);
 
         JButton[] buttons = {
-            new JButton("1. Agregar URL"),
-            new JButton("2. Buscar URL"),
-            new JButton("3. Recuperar URL"),
-            new JButton("4. Eliminar URL"),
-            new JButton("5. Mostrar histograma"),
-            new JButton("6. Importar URLs"),
-            new JButton("7. Salir")
+            new JButton("Agregar URL"),
+            new JButton("Buscar URL"),
+            new JButton("Recuperar URL"),
+            new JButton("Eliminar URL"),
+            new JButton("Mostrar histograma"),
+            new JButton("Importar URLs"),
+            new JButton("Salir")
         };
         
         for (JButton button : buttons) {
@@ -128,21 +128,21 @@ public class Main extends JFrame {
     private void procesarCSV(File file) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
-            while ((line = reader.readLine()) != null) {
-                String[] partes = line.split(",");
-                for (String parte : partes) {
-                    String url = parte.trim()
-                                    .replaceAll("^\"|\"$", "")
-                                    .replaceAll("^'|'$", "");
-                    if (!url.isEmpty()) {
-                        try {
-                            urlMap.add(url);
-                        } catch (Exception e) {
-                            System.out.println("Error al agregar: "+url+". "+e.getMessage());
+                while ((line = reader.readLine()) != null) {
+                    String[] partes = line.split(",");
+                    for (String parte : partes) {
+                        String url = parte.trim()
+                                        .replaceAll("^\"|\"$", "")
+                                        .replaceAll("^'|'$", "");
+                        if (!url.isEmpty()) {
+                            try {
+                                urlMap.add(url);
+                            } catch (Exception e) {
+                                System.out.println("Error al agregar: "+url+". "+e.getMessage());
+                            }
                         }
                     }
                 }
-            }
         }
     }
     private void agregarURL() {
@@ -212,14 +212,18 @@ public class Main extends JFrame {
     }
 
     public void exit(){
+        System.out.println("Cerrando...");
         ObjectOutputStream guardar = null;
+        System.out.println("Guardando tabla...");
         try {
             guardar = new ObjectOutputStream(new FileOutputStream("HashMap.ser"));
             guardar.writeObject(urlMap);
             guardar.close();
+            System.out.println("Guardando tabla exitosamente.");
         } catch (Exception e) { 
             JOptionPane.showMessageDialog(this, "Error al guardar: " + e.getMessage());
         }
+        System.out.println("Cerrando.");
         System.exit(0);
     }
 }
