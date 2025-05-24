@@ -51,6 +51,3 @@ Este proyecto implementa una interfaz gráfica para gestionar URLs largas y su v
    - Archivo binario que guarda automáticamente el estado del HashMap cuando se cierra la aplicación.
    - Se utiliza para mantener los datos entre sesiones sin necesidad de cargar el archivo manualmente.
 
-7. urls.txt / urls.csv (opcional)
-   - Archivos de entrada de texto con URLs.
-   - Se cargan mediante la opción "Cargar archivo" en la interfaz gráfica.
