@@ -40,7 +40,7 @@ Pasos para instalar y ejecutar el proyecto:
 
 Archivos de datos:
 - El proyecto puede usar un archivo urls.txt o urls.csv para cargar datos.
-- Si no tiene ninguno, puedes crear un archivo de texto con URLs.
+- Si no tiene ninguno, puedes crear un archivo de texto con URLs con extensiones txt o csv.
 - La tabla se almacena en un archivo HashMap.ser.
 
 
