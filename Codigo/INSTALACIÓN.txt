@@ -23,18 +23,15 @@ Requisitos Previos:
 Pasos para instalar y ejecutar el proyecto:
 1. Descomprima el archivo .zip.
 
-2. Abrir la carpeta del proyecto en consola.
+2. Abrir la carpeta del proyecto.
 
-3. Compilar el proyecto
-   - Abra la consola.
-   - Navegue a la carpeta "Codigo" donde están los archivos .java.
-   - Ejecute el siguiente comando para compilar todos los archivos:
-     javac *.java
+3. Compilar y ejecutar el proyecto
+   En Windows:
+   - Abra el archivo Acortador.bat y se ejecutara automaticamente.
+   
+   En Linux: 
+   - Haga click derecho en el archivo Acortador.sh y seleccione la opcion "Run as a program" o "Correr como programa".
      
-4. Ejecutar el proyecto
-   - Ejecute el siguiente comando:
-     java Main
-
 5. Uso del proyecto
    - En la ventana que aparece, puede cargar un archivo con URLs usando el botón “Cargar archivo”.
    - Puede agregar URLs manualmente.
@@ -44,5 +41,6 @@ Pasos para instalar y ejecutar el proyecto:
 Archivos de datos:
 - El proyecto puede usar un archivo urls.txt o urls.csv para cargar datos.
 - Si no tiene ninguno, puedes crear un archivo de texto con URLs.
-- Si desea puede usar el archivo HashMap.ser, que se encuentra dentro de la carpeta "Codigo", que ya contiene 170k URLs aproximadamente. Si quiere empezar de 0 elimine el archivo HashMap.ser.
+- La tabla se almacena en un archivo HashMap.ser.
+
 
